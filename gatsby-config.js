@@ -11,12 +11,6 @@ module.exports = {
   },
   plugins: [
     {
-      resolve: 'gatsby-plugin-google-analytics',
-      options: {
-        trackingId: process.env.TRACKING_ID,
-      },
-    },
-    {
       resolve: 'gatsby-source-contentful',
       options: {
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
