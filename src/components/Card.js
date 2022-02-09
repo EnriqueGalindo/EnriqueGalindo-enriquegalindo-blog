@@ -44,6 +44,8 @@ const ImgWrapper = styled.div`
 
   * {
     object-fit: cover;
+    display: flex;
+    justify-content: center;
 
     height: ${(props) => (props.large ? '340px' : '200px')};
   }
