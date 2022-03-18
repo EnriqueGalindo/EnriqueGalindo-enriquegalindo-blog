@@ -1,0 +1,50 @@
+* {
+  font-family: "Raleway", sans-serif;
+}
+
+html,
+body {
+  background-color: #f9f9f9;
+}
+#mailchimp div:nth-child(1) {
+  display: flex;
+  flex-direction: column;
+}
+#mailchimp div:nth-child(1) input {
+  flex: 1;
+  margin-bottom: 15px;
+  margin-top: 15px;
+  border: solid 1px #ccc;
+  padding: 15px;
+  border-radius: 10px;
+}
+#mailchimp div:nth-child(1) button {
+  flex: 1;
+  margin-bottom: 15px;
+  margin-top: 15px;
+  padding: 15px;
+  border-radius: 30px;
+  border: solid 1px #f65f48;
+  background: transparent;
+  color: #f65f48;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.08cm;
+}
+.subscribe-email-modal-button-wrapper {
+  margin: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.subscribe-email-modal-button-wrapper button {
+  padding: 15px;
+  border-radius: 30px;
+  border: solid 2px #f65f48;
+  background: transparent;
+  color: #f65f48;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.08cm;
+  min-width: 250px;
+}
