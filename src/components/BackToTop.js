@@ -1,32 +1,32 @@
 import React from 'react';
 import scrollTo from 'gatsby-plugin-smoothscroll';
 import styled from 'styled-components';
-import { FaArrowAltCircleUp } from 'react-icons/fa';
+import { FaArrowAltCircleUp } from '@react-icons/all-files/fa/FaArrowAltCircleUp';
 
 const Button = styled.button`
-  position: fixed;
-  bottom: 5vh;
-  right: 10vw;
   background-color: transparent;
   border: none;
-  border-radius: 50%;
+  border-radius: 1rem;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
 
   * {
-    width: 50px;
-    height: 50px;
-    color: #f5381a;
+    color: black;
     transition-duration: 0.2s;
     cursor: pointer;
+    text-decoration: underline;
   }
 
   &:hover * {
-    color: #f5371ad8;
+    color: gray;
   }
 `;
 
 const BackToTop = () => {
   return (
     <Button onClick={() => scrollTo('#top')}>
+      <span style={{ marginRight: '0.5rem' }}>Back to top</span>
       <FaArrowAltCircleUp />
     </Button>
   );

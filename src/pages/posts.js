@@ -9,7 +9,7 @@ import Seo from '../components/Seo';
 import Header from '../components/Header';
 import Card from '../components/Card';
 import Footer from '../components/Footer';
-import { FaSearch } from 'react-icons/fa';
+import { FaSearch } from '@react-icons/all-files/fa/FaSearch';
 
 const Title = styled.h1`
   margin-top: 50px;
@@ -47,9 +47,8 @@ const Options = styled.div`
 
 const Input = styled.div`
   display: flex;
-  padding: 10px;
   background-color: #fff;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   border-radius: 8px;
   margin-bottom: 50px;
   width: fit-content;
@@ -57,14 +56,15 @@ const Input = styled.div`
   input {
     border: none;
     outline: none;
+    padding: 1rem;
   }
 
   button {
-    background-color: #f5381a;
-    color: white;
+    color: black;
+    background-color: transparent;
     border: none;
-    border-radius: 8px;
     cursor: pointer;
+    padding: 1rem;
   }
 
   @media only screen and (max-width: 600px) {
@@ -91,6 +91,19 @@ const Error = styled.h1`
   width: 100%;
   margin: auto;
   height: calc(100vh - 400px);
+`;
+
+const Select = styled.select`
+  padding: 1rem;
+  margin-left: 1rem;
+  width: 8rem;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  outline: none;
+
+  option {
+    padding: 1rem;
+  }
 `;
 
 const Posts = ({ data }) => {
@@ -172,18 +185,20 @@ const Posts = ({ data }) => {
         siteUrl={siteUrl}
       />
       <Header name={name} />
-      <Fade left distance='60px'>
-        <Title>The Library</Title>
-      </Fade>
-      <Fade right distance='60px'>
-        <Underline />
-      </Fade>
+      <Title>The Library</Title>
+      <Underline />
 
       <Wrapper>
         <Options>
           <div>
-            Sort By:{` `}
-            <input
+            <span style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
+              Sort By
+            </span>
+            <Select>
+              <option>New</option>
+              <option>Old</option>
+            </Select>
+            {/* <input
               type='radio'
               name='sort'
               id='new'
@@ -198,7 +213,7 @@ const Posts = ({ data }) => {
               checked={sortNew === false}
               onChange={() => setSortNew(false)}
             />
-            <label htmlFor='old'>Old</label>
+            <label htmlFor='old'>Old</label> */}
           </div>
           <Input>
             <input

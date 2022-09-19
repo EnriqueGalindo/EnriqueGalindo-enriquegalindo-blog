@@ -13,7 +13,7 @@ const List = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 45px;
+  margin: 3rem 0 0;
 
   li {
     margin: 0 25px;

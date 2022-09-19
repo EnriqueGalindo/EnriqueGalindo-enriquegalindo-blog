@@ -16,8 +16,7 @@ import '../normalize.css';
 import '../global.css';
 
 const Wrapper = styled.div`
-  width: 70%;
-  margin: 50px auto;
+  width: 100%;
 
   h1 {
     text-align: center;
@@ -33,10 +32,9 @@ const Wrapper = styled.div`
 const ImageWrapper = styled.div`
   margin: auto;
   text-align: center;
-
-  * {
-    border-radius: 16px;
-  }
+  width: 100%;
+  height: 50vw;
+  overflow: hidden;
 `;
 
 const Paragraph = styled.p`
@@ -45,10 +43,15 @@ const Paragraph = styled.p`
 `;
 
 const RichText = styled.div`
+  width: 70vw;
+  margin: 32px auto 0;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   padding: 64px;
-  margin-top: 32px;
+
+  * {
+    line-height: 2.5rem;
+  }
 `;
 
 const Post = ({ data }) => {
@@ -77,6 +80,7 @@ const Post = ({ data }) => {
           <GatsbyImage
             image={postData.image.gatsbyImageData}
             alt={postData.image.title}
+            objectFit='cover'
           />
         </ImageWrapper>
 
@@ -93,14 +97,24 @@ const Post = ({ data }) => {
 
         <Paragraph>{authorData.name}</Paragraph>
         <Paragraph>{postData.createdAt}</Paragraph>
-        <RichText>{renderRichText(postData.postContent, options)}</RichText>
+        <RichText>
+          {renderRichText(postData.postContent, options)}
+
+          <div
+            style={{
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <BackToTop />
+          </div>
+        </RichText>
       </Wrapper>
 
       <Author data={authorData} />
 
       <Footer data={footerData} />
-
-      <BackToTop />
     </>
   );
 };
@@ -111,7 +125,7 @@ export const query = graphql`
       title
       date(formatString: "MMMM DD, YYYY")
       image {
-        gatsbyImageData
+        gatsbyImageData(layout: FULL_WIDTH, aspectRatio: 2)
         title
       }
       postContent {

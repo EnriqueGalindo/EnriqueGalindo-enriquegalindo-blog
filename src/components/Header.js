@@ -6,7 +6,7 @@ const Wrapper = styled.div`
   box-sizing: border-box;
   width: 100%;
   height: fit-content;
-  padding: 50px;
+  padding: 50px 0 50px 10%;
   background-color: #263843;
   h1 {
     padding: 0;

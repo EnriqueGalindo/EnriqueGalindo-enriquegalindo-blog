@@ -3,21 +3,21 @@ import { GatsbyImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  width: 70%;
+  width: 70vw;
   margin: 100px auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 2rem;
 `;
 
 const ProfileWrapper = styled.div`
   max-width: 150px;
   max-height: 150px;
-  margin: 0 25px;
+  margin: 2rem 0;
 
   * {
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
     border-radius: 50%;
   }
 `;
@@ -41,12 +41,13 @@ const Info = styled.div`
 
 const Paragraph = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
 
   p {
-    width: 40%;
+    width: 45%;
     text-align: center;
+    line-height: 2rem;
   }
 
   @media only screen and (max-width: 800px) {

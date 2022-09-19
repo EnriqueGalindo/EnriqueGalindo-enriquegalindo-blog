@@ -1,10 +1,8 @@
 import React from 'react';
-import {
-  FaFacebookF,
-  FaTwitter,
-  FaInstagram,
-  FaLinkedinIn,
-} from 'react-icons/fa';
+import { FaFacebookF } from '@react-icons/all-files/fa/FaFacebookF';
+import { FaTwitter } from '@react-icons/all-files/fa/FaTwitter';
+import { FaInstagram } from '@react-icons/all-files/fa/FaInstagram';
+import { FaLinkedinIn } from '@react-icons/all-files/fa/FaLinkedinIn';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -116,7 +114,7 @@ const Footer = ({ data }) => {
         </li>
       </SocialLinks>
       <Underline />
-      <Copyright>{copyrightText}</Copyright>
+      <Copyright>Copyright &copy; 2022</Copyright>
     </Container>
   );
 };

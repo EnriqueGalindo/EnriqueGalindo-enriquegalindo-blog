@@ -72,23 +72,28 @@ const Posts = ({ data }) => {
       <Fade bottom delay={200} distance='60px'>
         <Card large={true} data={data[0].node} />
       </Fade>
-      <Fade left distance='60px'>
-        <Title>Latest Posts</Title>
-      </Fade>
-      <Fade right distance='60px'>
-        <Underline />
-      </Fade>
-      <LatestPosts>
-        {data.slice(1).map((edge, i) => {
-          return (
-            <li key={i}>
-              <Fade bottom delay={i * 200} distance='60px'>
-                <Card data={edge.node} />
-              </Fade>
-            </li>
-          );
-        })}
-      </LatestPosts>
+      {data.slice(1).length > 0 && (
+        <>
+          <Fade left distance='60px'>
+            <Title>Latest Posts</Title>
+          </Fade>
+          <Fade right distance='60px'>
+            <Underline />
+          </Fade>
+
+          <LatestPosts>
+            {data.slice(1).map((edge, i) => {
+              return (
+                <li key={i}>
+                  <Fade bottom delay={i * 200} distance='60px'>
+                    <Card data={edge.node} />
+                  </Fade>
+                </li>
+              );
+            })}
+          </LatestPosts>
+        </>
+      )}
       <ButtonWrapper>
         <button onClick={() => navigate('/posts/')}>See All</button>
       </ButtonWrapper>

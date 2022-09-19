@@ -46,10 +46,18 @@ module.exports = {
       resolve: 'gatsby-plugin-web-font-loader',
       options: {
         google: {
-          families: ['Raleway'],
+          families: ['Roboto'],
         },
       },
     },
     `gatsby-plugin-smoothscroll`,
+    {
+      resolve: 'gatsby-plugin-mailchimp',
+      options: {
+        endpoint:
+          'https://blog.us14.list-manage.com/subscribe/post?u=b634bdf381af3b784332e88da&id=3a6592a134&f_id=0046fbe0f0',
+        timeout: 3500, // number; the amount of time, in milliseconds, that you want to allow mailchimp to respond to your request before timing out. defaults to 3500
+      },
+    },
   ],
 };

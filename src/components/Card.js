@@ -119,7 +119,7 @@ const Card = ({ large, data }) => {
         </Title>
         <Info>{date}</Info>
         <ShortDesc>
-          {shortDescription}
+          {shortDescription}...
           <ReadMore onClick={() => navigate(`/posts/${slug}`)}>
             {` `}Read More
           </ReadMore>
