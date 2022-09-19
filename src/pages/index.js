@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { AiOutlineMail } from '@react-icons/all-files/ai/AiOutlineMail';
 import addToMailchimp from 'gatsby-plugin-mailchimp';
 
-import { getCookie, setCookie, validateEmail } from '../helper/hooks';
+import { getCookie, setCookie } from '../helper/hooks';
 import Hero from '../sections/Hero';
 import Posts from '../sections/Posts';
 import Footer from '../components/Footer';
@@ -228,7 +228,7 @@ export const query = graphql`
           title
           shortDescription
           image {
-            gatsbyImageData
+            gatsbyImageData(layout: FULL_WIDTH, aspectRatio: 2)
             title
           }
         }

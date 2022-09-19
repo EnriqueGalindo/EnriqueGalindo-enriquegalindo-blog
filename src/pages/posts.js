@@ -274,7 +274,7 @@ export const query = graphql`
           title
           shortDescription
           image {
-            gatsbyImageData
+            gatsbyImageData(layout: FULL_WIDTH, aspectRatio: 2)
             title
           }
         }
