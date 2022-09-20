@@ -173,6 +173,14 @@ const Posts = ({ data }) => {
     }
   };
 
+  const handleSort = (e) => {
+    if (e.target.value === 'New') {
+      setSortNew(true);
+    } else if (e.target.value === 'Old') {
+      setSortNew(false);
+    }
+  };
+
   return (
     <main>
       <Seo
@@ -194,26 +202,10 @@ const Posts = ({ data }) => {
             <span style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
               Sort By
             </span>
-            <Select>
+            <Select onChange={handleSort}>
               <option>New</option>
               <option>Old</option>
             </Select>
-            {/* <input
-              type='radio'
-              name='sort'
-              id='new'
-              checked={sortNew === true}
-              onChange={() => setSortNew(true)}
-            />
-            <label htmlFor='new'>New</label>
-            <input
-              type='radio'
-              name='sort'
-              id='old'
-              checked={sortNew === false}
-              onChange={() => setSortNew(false)}
-            />
-            <label htmlFor='old'>Old</label> */}
           </div>
           <Input>
             <input
