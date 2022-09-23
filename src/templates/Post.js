@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { graphql } from 'gatsby';
 import { renderRichText } from 'gatsby-source-contentful/rich-text';
 import { GatsbyImage } from 'gatsby-plugin-image';
+import { AiOutlineMail } from '@react-icons/all-files/ai/AiOutlineMail';
 import styled from 'styled-components';
+import addToMailchimp from 'gatsby-plugin-mailchimp';
 
+import { getCookie, setCookie } from '../helper/hooks';
 import { options } from '../components/RichTextOptions';
 import Seo from '../components/Seo';
 import Header from '../components/Header';
@@ -11,6 +14,7 @@ import SocialShare from '../components/SocialShare';
 import Author from '../components/Author';
 import Footer from '../components/Footer';
 import BackToTop from '../components/BackToTop';
+import ModalBox from '../components/Modal';
 
 import '../normalize.css';
 import '../global.css';
@@ -32,8 +36,7 @@ const Wrapper = styled.div`
 const ImageWrapper = styled.div`
   margin: auto;
   text-align: center;
-  width: 100%;
-  height: 50vw;
+  width: 80%;
   overflow: hidden;
 `;
 
@@ -54,12 +57,96 @@ const RichText = styled.div`
   }
 `;
 
+const IconWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const Title = styled.h1`
+  text-align: center;
+  width: 100%;
+`;
+const Desc = styled.div`
+  text-align: center;
+`;
+const SubscribeInput = styled.div`
+  margin: 2rem 0;
+  display: flex;
+  width: 100%;
+
+  @media only screen and (max-width: 600px) {
+    flex-direction: column;
+  }
+
+  input {
+    box-sizing: border-box;
+    outline: none;
+    padding: 1rem 0 1rem 1rem;
+    width: 100%;
+
+    @media only screen and (max-width: 600px) {
+      width: 100%;
+    }
+  }
+
+  button {
+    background-color: black;
+    color: white;
+    padding: 1rem 2rem;
+    transition-duration: 300ms;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    @media only screen and (max-width: 600px) {
+      width: 100%;
+    }
+  }
+`;
+
+const STATE = {
+  IDLE: 'IDLE',
+  ERROR: 'ERROR',
+  SUCCESS: 'SUCCESS',
+};
+
 const Post = ({ data }) => {
   const postData = data.contentfulBlogPost;
   const authorData = data.allContentfulAboutTheAuthor.edges[0].node;
   const footerData = data.allContentfulFooter.edges[0].node;
 
   const websiteSeo = data.allContentfulWebsiteSeo.edges[0].node;
+
+  const [subscribeEmail, setSubscribeEmail] = useState('');
+  const [subscribeState, setSubscribeState] = useState({ state: STATE.IDLE });
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    const subscribeOpened = getCookie('subscribeOpened');
+
+    if (subscribeOpened !== 'true') {
+      setTimeout(() => {
+        setIsModalOpen(true);
+        setCookie('subscribeOpened', true, 7);
+      }, 5000);
+    }
+  }, []);
+
+  const handleSubscribe = async () => {
+    const data = await addToMailchimp(subscribeEmail);
+
+    if (data.result === 'error') {
+      setSubscribeState({ state: STATE.ERROR, message: data.msg });
+    } else {
+      setSubscribeState({ state: STATE.SUCCESS });
+      setTimeout(() => {
+        setIsModalOpen(false);
+      }, 3000);
+    }
+  };
 
   return (
     <>
@@ -115,6 +202,50 @@ const Post = ({ data }) => {
       <Author data={authorData} />
 
       <Footer data={footerData} />
+
+      {isModalOpen && (
+        <ModalBox closeEvent={() => setIsModalOpen(false)}>
+          <IconWrapper>
+            <AiOutlineMail style={{ fontSize: '5rem', margin: '0 auto' }} />
+          </IconWrapper>
+          <Title>Want to stay updated?</Title>
+          {subscribeState.state !== STATE.SUCCESS ? (
+            <>
+              <Desc>You can keep up with my posts in the future.</Desc>
+              {subscribeState.state === STATE.ERROR && (
+                <div
+                  style={{
+                    textAlign: 'center',
+                    color: 'red',
+                    paddingTop: '1rem',
+                  }}
+                >
+                  {subscribeState.message}
+                </div>
+              )}
+              <SubscribeInput>
+                <input
+                  type='text'
+                  placeholder='Enter your email here'
+                  value={subscribeEmail}
+                  onChange={(e) => setSubscribeEmail(e.target.value)}
+                />
+                <button onClick={handleSubscribe}>Subscribe</button>
+              </SubscribeInput>
+            </>
+          ) : (
+            <div
+              style={{
+                textAlign: 'center',
+                color: 'green',
+                fontWeight: 'bold',
+              }}
+            >
+              Successfully subscribed!
+            </div>
+          )}
+        </ModalBox>
+      )}
     </>
   );
 };
@@ -125,7 +256,7 @@ export const query = graphql`
       title
       date(formatString: "MMMM DD, YYYY")
       image {
-        gatsbyImageData(layout: FULL_WIDTH, aspectRatio: 2)
+        gatsbyImageData(layout: FULL_WIDTH)
         title
       }
       postContent {
