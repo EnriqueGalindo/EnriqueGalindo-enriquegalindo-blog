@@ -68,6 +68,27 @@ const RichText = styled.div`
   }
 `;
 
+const SubscribeButton = styled.button`
+  margin-top: 2rem;
+  background-color: transparent;
+  color: #f5381a;
+  font-weight: bold;
+  border: none;
+  border: 2px solid #f5371acf;
+  border-radius: 0.2rem;
+  width: 220px;
+  height: 60px;
+  font-size: 19px;
+  font-weight: 600;
+  transition: ease-out 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    color: #f5371aa0;
+    border: 1px solid #f5371aa0;
+  }
+`;
+
 const IconWrapper = styled.div`
   width: 100%;
   display: flex;
@@ -195,6 +216,11 @@ const Post = ({ data }) => {
 
         <Paragraph>{authorData.name}</Paragraph>
         <Paragraph>{postData.createdAt}</Paragraph>
+        <div
+          style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+        >
+          <SubscribeButton onClick={setIsModalOpen}>Subscribe</SubscribeButton>
+        </div>
         <RichText>
           {renderRichText(postData.postContent, options)}
 
