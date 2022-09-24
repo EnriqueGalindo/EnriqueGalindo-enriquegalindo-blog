@@ -26,10 +26,11 @@ const Wrapper = styled.div`
     text-align: center;
     font-size: 40px;
     font-weight: bold;
-  }
 
-  @media only screen and (max-width: 800px) {
-    width: 90%;
+    @media only screen and (max-width: 800px) {
+      font-size: 24px;
+      padding: 0 10px;
+    }
   }
 `;
 
@@ -38,6 +39,10 @@ const ImageWrapper = styled.div`
   text-align: center;
   width: 80%;
   overflow: hidden;
+
+  @media only screen and (max-width: 800px) {
+    width: 100%;
+  }
 `;
 
 const Paragraph = styled.p`
@@ -46,7 +51,8 @@ const Paragraph = styled.p`
 `;
 
 const RichText = styled.div`
-  width: 70vw;
+  box-sizing: border-box;
+  width: 70%;
   margin: 32px auto 0;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
@@ -54,6 +60,11 @@ const RichText = styled.div`
 
   * {
     line-height: 2.5rem;
+  }
+
+  @media only screen and (max-width: 800px) {
+    width: 100%;
+    padding: 2rem;
   }
 `;
 
@@ -199,7 +210,7 @@ const Post = ({ data }) => {
         </RichText>
       </Wrapper>
 
-      <Author data={authorData} />
+      <Author data={authorData} setIsModalOpen={() => setIsModalOpen(true)} />
 
       <Footer data={footerData} />
 

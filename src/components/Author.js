@@ -3,13 +3,19 @@ import { GatsbyImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  width: 70vw;
+  box-sizing: border-box;
+  width: 70%;
   margin: 100px auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 2rem;
+
+  @media only screen and (max-width: 800px) {
+    width: 90%;
+    padding: 1rem;
+  }
 `;
 
 const ProfileWrapper = styled.div`
@@ -54,12 +60,33 @@ const Paragraph = styled.div`
     flex-direction: column;
 
     p {
-      width: 80%;
+      width: 100%;
     }
   }
 `;
 
-const Author = ({ data }) => {
+const SubscribeButton = styled.button`
+  margin-top: 2rem;
+  background-color: transparent;
+  color: #f5381a;
+  font-weight: bold;
+  border: none;
+  border: 2px solid #f5371acf;
+  border-radius: 0.2rem;
+  width: 220px;
+  height: 60px;
+  font-size: 19px;
+  font-weight: 600;
+  transition: ease-out 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    color: #f5371aa0;
+    border: 1px solid #f5371aa0;
+  }
+`;
+
+const Author = ({ data, setIsModalOpen }) => {
   const {
     name,
     status,
@@ -81,6 +108,7 @@ const Author = ({ data }) => {
           <p>{paragraph2}</p>
         </Paragraph>
       </Info>
+      <SubscribeButton onClick={setIsModalOpen}>Subscribe</SubscribeButton>
     </Wrapper>
   );
 };
