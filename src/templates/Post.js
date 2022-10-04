@@ -156,6 +156,8 @@ const Post = ({ data }) => {
   const [subscribeState, setSubscribeState] = useState({ state: STATE.IDLE });
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  console.log('data is:', data);
+
   useEffect(() => {
     const subscribeOpened = getCookie('subscribeOpened');
 
@@ -298,6 +300,13 @@ export const query = graphql`
       }
       postContent {
         raw
+        references {
+          ... on ContentfulAsset {
+            contentful_id
+            __typename
+            gatsbyImageData
+          }
+        }
       }
       seo {
         title

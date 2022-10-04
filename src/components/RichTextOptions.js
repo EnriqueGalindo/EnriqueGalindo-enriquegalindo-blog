@@ -32,6 +32,10 @@ export const options = {
     [BLOCKS.EMBEDDED_ASSET]: (node, children) => {
       const { gatsbyImageData, title } = node.data.target;
 
+      if (!gatsbyImageData) {
+        return null;
+      }
+
       return <GatsbyImage image={gatsbyImageData} alt={title} />;
     },
     hyperlink: (node, children) => {
