@@ -37,7 +37,7 @@ const Wrapper = styled.div`
 const ImageWrapper = styled.div`
   margin: auto;
   text-align: center;
-  width: 80%;
+  width: 100%;
   overflow: hidden;
 
   @media only screen and (max-width: 800px) {
